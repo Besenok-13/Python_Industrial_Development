@@ -1,0 +1,9 @@
+ERROR: Cannot install -r requirements-local-conflict.txt (line 1) and -r requirements-local-conflict.txt (line 2) because these package versions have conflicting dependencies.
+
+The conflict is caused by:
+    pkg-alpha 0.1.0 depends on shared-demo-lib<2
+    pkg-beta 0.1.0 depends on shared-demo-lib>=2
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip to attempt to solve the dependency conflict

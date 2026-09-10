@@ -1,0 +1,2 @@
+./packages/pkg_alpha
+./packages/pkg_beta

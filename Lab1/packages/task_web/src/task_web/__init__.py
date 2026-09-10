@@ -1,3 +1,3 @@
-from .store import Task, TaskStore
+from .store import Sprint, Task, TaskStore
 
-__all__ = ["Task", "TaskStore"]
+__all__ = ["Sprint", "Task", "TaskStore"]

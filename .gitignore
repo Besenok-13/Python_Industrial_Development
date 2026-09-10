@@ -8,3 +8,5 @@ build/
 uv.lock
 *.html
 *.pptx
+HINT.md
+*HINT.md

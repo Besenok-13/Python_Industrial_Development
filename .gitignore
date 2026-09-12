@@ -8,7 +8,7 @@ build/
 uv.lock
 *.html
 !Labs/Lab1/src/team_board/templates/dashboard.html
+!Students/**/dashboard.html
 *.pptx
 HINT.md
 *HINT.md
-Students/*/

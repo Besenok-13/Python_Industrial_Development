@@ -4,65 +4,63 @@
 ошибку в календарной утилите и найти расхождение между тестами и поведением
 веб-страницы.
 
-## Личный рабочий каталог
+## Fork, ветка и рабочая папка
 
-Каждый студент создаёт три независимых каталога: `task1`, `task2` и `task3` в
-`Students/<student_id>/Lab1`. В каждом каталоге находится отдельный клон только
-назначенной ветки и личная ветка для отправки решения. Используйте латинский
-`student_id` без пробелов, например `Python-Pythonovich`.
+Каждый студент работает в своём fork и создаёт отдельную ветку и Pull Request
+для каждой задачи. В коммит попадают файлы из
+`Students/<github-login>/Lab1/taskN`, поэтому работы разных студентов не
+пересекаются. Используйте свой GitHub login в нижнем регистре вместо
+`<github-login>`.
 
-1. Создайте личный каталог для лабораторной:
-
-   ```bash
-   mkdir -p Students/Python-Pythonovich/Lab1
-   cd Students/Python-Pythonovich/Lab1
-   ```
-
-2. Для первой задачи скачайте только её стартовую ветку в каталог `task1` и
-   создайте личную ветку:
+1. На странице исходного репозитория нажмите **Fork**. Затем склонируйте свой
+   fork и подключите исходный репозиторий как `upstream`:
 
    ```bash
-   git clone --branch Lab1_task1 --single-branch https://github.com/Besenok-13/Python_Industrial_Development.git task1
-   cd task1
-   git switch --create students/Python-Pythonovich/Lab1_task1
+   git clone https://github.com/<github-login>/Python_Industrial_Development.git
+   cd Python_Industrial_Development
+   git remote add upstream https://github.com/Besenok-13/Python_Industrial_Development.git
+   git fetch upstream
    ```
 
-   Код первой задачи редактируется только в
-   `Students/Python-Pythonovich/Lab1/task1`. Не вносите изменения напрямую
-   в `Lab1_task1`: это исходная ветка задания.
-
-3. После ротации роли создайте аналогичный каталог для следующего задания.
-   Пример для второй задачи:
+2. Создайте ветку для назначенной задачи от актуального `upstream/main`.
+   Пример для первой задачи:
 
    ```bash
-   cd ../..
-   git clone --branch Lab1_task2 --single-branch https://github.com/Besenok-13/Python_Industrial_Development.git task2
-   cd task2
-   git switch --create students/Python-Pythonovich/Lab1_task2
+   git switch --create lab1/<github-login>/task1 upstream/main
+   mkdir -p Students/<github-login>/Lab1/task1
+   git archive upstream/Lab1_task1 | tar -x -C Students/<github-login>/Lab1/task1
+   cd Students/<github-login>/Lab1/task1
    ```
 
-4. Для третьего задания используйте те же команды, заменив `task2` и
-   `Lab1_task2` на `task3` и `Lab1_task3`. В результате структура будет такой:
+   `git archive` копирует стартовое состояние только назначенной задачи в вашу
+   папку. Не изменяйте ветки `Lab1_task1`, `Lab1_task2` и `Lab1_task3`.
+
+3. Для следующей роли вернитесь в корень клона, получите изменения преподавателя
+   и создайте новую ветку и новую папку. Пример для второй задачи:
+
+   ```bash
+   cd ../../../..
+   git fetch upstream
+   git switch --create lab1/<github-login>/task2 upstream/main
+   mkdir -p Students/<github-login>/Lab1/task2
+   git archive upstream/Lab1_task2 | tar -x -C Students/<github-login>/Lab1/task2
+   cd Students/<github-login>/Lab1/task2
+   ```
+
+4. Для третьей задачи замените `task2` и `Lab1_task2` на `task3` и
+   `Lab1_task3`. В результате в вашей ветке появятся только ваши каталоги:
 
    ```text
-   Students/Python-Pythonovich/Lab1/
+   Students/<github-login>/Lab1/
    task1/
    task2/
    task3/
    ```
 
-5. Чтобы продолжить ранее начатую задачу, перейдите в её каталог. Переключать
-   ветку не нужно, потому что у каждой задачи отдельный клон:
-
-   ```bash
-   cd Students/Python-Pythonovich/Lab1/task1
-   git status
-   ```
-
 ## Подготовка окружения
 
 После перехода в каталог нужной задачи, например
-`Students/<student_id>/Lab1/task1`, создайте окружение:
+`Students/<github-login>/Lab1/task1`, создайте окружение:
 
 ```bash
 python -m venv .venv
@@ -80,139 +78,83 @@ source .venv/bin/activate
 .venv\Scripts\Activate.ps1
 ```
 
-## Переход к следующей задаче
-
-До перехода к следующей роли зафиксируйте и отправьте решение. Находясь в
-каталоге нужной задачи, выполните:
-
-```bash
-git status
-git add pyproject.toml packages src tests
-git commit -m "Fix Lab1 task"
-git push -u origin students/Python-Pythonovich/Lab1_task1
-```
-
-Для задач 2 и 3 замените номер в имени личной ветки. После push перейдите в
-следующий каталог `taskN`; первая задача останется доступна в `task1`.
-
 ## Задача 1. Восстановить зависимости
 
 1. Попробуйте установить корневой проект, тестовые зависимости и три локальных
-   пакета одной командой:
+   пакета одной командой. Если это не получится - нужно понять почему, кто виноват и что делать.
 
-   ```bash
-   python -m pip install -e '.[dev]' -r requirements.txt
-   ```
-
-2. Прочитайте сообщение resolver: оно указывает на несовместимые диапазоны
-   версий. Сравните декларации зависимостей в корневом проекте и локальных
-   пакетах:
-
-   ```bash
-   grep -n "fastapi\|httpx" pyproject.toml packages/*/pyproject.toml
-   ```
-
-3. Измените ограничения так, чтобы для каждого пакета существовала общая
-   версия. Повторите установку и проверьте согласованность окружения:
-
-   ```bash
-   python -m pip install -e '.[dev]' -r requirements.txt
-   python -m pip check
-   ```
-
-4. Установка может завершиться успешно, но приложение всё ещё может быть
-   несовместимо с выбранной версией библиотеки. Запустите сервер:
-
+2. После того как получилось сбилдить пакет, попробуйте его запустить
    ```bash
    uvicorn team_board.main:app --reload
    ```
 
-5. Если при старте возникла ошибка аргумента клиента HTTP, найдите место его
-   создания и сопоставьте используемый API с выбранным диапазоном HTTPX:
+3. Задание считается выполненым, когда пакет успешно запущен и вам удалось открыть главную страницу получившегося сайта
 
-   ```bash
-   grep -R -n "httpx\.Client\|httpx\.AsyncClient" packages src
-   ```
-
-6. После исправления остановите сервер `Ctrl+C` и выполните тесты:
-
-   ```bash
-   pytest
-   ```
 
 ## Задача 2. Исправить календарную функцию
 
-1. Запустите только падающий тест:
+1. Что-то пошло не так. Программисты соседнего отдела говорят, что какой-то тест упал. Может, получится понять в чём проблема, если сбилдить их пакет и запустить тесты...
 
+Тесты запускаются следующим образом:
    ```bash
-   pytest tests/test_schedule.py -q
-   ```
-
-2. Откройте тест, изучите его входные данные и ожидаемый результат. Затем
-   найдите календарные операции в пакете:
-
-   ```bash
-   grep -R -n "timedelta" packages/task_workflow
-   ```
-
-3. Откройте её реализацию и сравните операцию с ожидаемой датой из теста.
-   Исправляйте только расчёт даты, не меняя ожидание теста.
-
-4. Проверьте исправление и затем весь набор тестов:
-
-   ```bash
-   pytest tests/test_schedule.py -q
    pytest
    ```
 
+Если хочется узнать что-то конкретное -
+   ```bash
+   pytest <путь_до_файла_с_тестами> -q
+   ```
+
+Задание считается выполненым, когда все тесты проходят и при этом, их количество и вызовы остались неизмменными.
+
 ## Задача 3. Найти расхождение тестов и приложения
 
-1. Убедитесь, что тесты метрики проходят:
+
+1. Что-то на главной странице явно не так... 2/6, это, кажется, чуть больше чем 29%... Но при этом, команда которая отдала вам этот репозиторий утверждает, что у них все тесты проходят... А ещё, они утверждают, что у них классная ридмишка! И её даже можно почитать. Я слышал, что они хвалились, что они классные программисты и хорошо описывают поведение программы в ридмим.
 
    ```bash
    pytest tests/test_metrics.py -q
    ```
 
-2. Прочитайте описание показателя выполнения в `README.md`, затем найдите,
-   откуда в обработчике главной страницы поступает значение показателя:
-
-   ```bash
-   grep -R -n "completion" src packages tests
-   ```
-
-3. Проследите всю цепочку вызовов от `dashboard` до функции, которая считает
-   процент. Сравните её формулу с функцией, покрытой тестами. Исправьте код,
-   фактически используемый страницей, сохранив корректное поведение для
-   пустого списка.
-
-4. Запустите приложение и откройте главную страницу:
+2. Запустите приложение и откройте главную страницу:
 
    ```bash
    uvicorn team_board.main:app --reload
    ```
 
    Перейдите по адресу `http://127.0.0.1:8000`, сравните отображаемый процент
-   с данными задач и остановите сервер `Ctrl+C`.
+   с данными задач.
 
-5. Завершите проверку:
 
-   ```bash
-   pytest
-   python -m pip check
-   ```
+## Отправка решения через Pull Request
 
-## Отправка решения
-
-Перед отправкой решения покажите изменённые файлы и убедитесь, что в коммит не
-попало виртуальное окружение:
+Из корня клона добавьте только папку своей задачи, создайте commit и отправьте
+ветку в свой fork. Пример для первой задачи:
 
 ```bash
+cd ../../../..
 git status
-git diff
-git add pyproject.toml packages src tests
-git commit -m "Fix Lab1 task"
-git push -u origin students/Python-Pythonovich/Lab1_task1
+git diff -- Students/<github-login>/Lab1/task1
+git add Students/<github-login>/Lab1/task1
+git commit -m "Complete Lab1 task 1"
+git push -u origin lab1/<github-login>/task1
 ```
 
-Каждое изменение должно объясняться сообщением ошибки, тестом или фактическим
-поведением веб-страницы.
+На GitHub откройте страницу своего fork и нажмите **Contribute**, затем
+**Open pull request**. В форме PR выберите:
+
+- base repository: `Besenok-13/Python_Industrial_Development`;
+- base branch: `main`;
+- head repository: ваш fork;
+- compare branch: `lab1/<github-login>/task1`.
+
+Для задач 2 и 3 замените номер во всех путях, имени ветки и сообщении commit.
+Не отправляйте изменения напрямую в `main`.
+
+Если перед слиянием преподаватель обновил `main`, синхронизируйте свою ветку:
+
+```bash
+git fetch upstream
+git rebase upstream/main
+git push --force-with-lease
+```

@@ -1,66 +1,15 @@
 # Лабораторная работа 1: восстановление Team Board
 
-Цель работы: последовательно восстановить установку приложения, исправить
-ошибку в календарной утилите и найти расхождение между тестами и поведением
-веб-страницы.
+Цель работы: последовательно восстановить установку пакета, исправить
+ошибки в репозитории для корректной работы веб-приложения.
 
-## Fork, ветка и рабочая папка
+## [Как именно работать с гитхабом:](lab1_GitHub_workflow.md)
 
-Каждый студент работает в своём fork и создаёт отдельную ветку и Pull Request
-для каждой задачи. В коммит попадают файлы из
-`Students/<github-login>/Lab1/taskN`, поэтому работы разных студентов не
-пересекаются. Используйте свой GitHub login в нижнем регистре вместо
-`<github-login>`.
-
-1. На странице исходного репозитория нажмите **Fork**. Затем склонируйте свой
-   fork и подключите исходный репозиторий как `upstream`:
-
-   ```bash
-   git clone https://github.com/<github-login>/Python_Industrial_Development.git
-   cd Python_Industrial_Development
-   git remote add upstream https://github.com/Besenok-13/Python_Industrial_Development.git
-   git fetch upstream
-   ```
-
-2. Создайте ветку для назначенной задачи от актуального `upstream/main`.
-   Пример для первой задачи:
-
-   ```bash
-   git switch --create lab1/<github-login>/task1 upstream/main
-   mkdir -p Students/<github-login>/Lab1/task1
-   git archive upstream/Lab1_task1 | tar -x -C Students/<github-login>/Lab1/task1
-   cd Students/<github-login>/Lab1/task1
-   ```
-
-   `git archive` копирует стартовое состояние только назначенной задачи в вашу
-   папку. Не изменяйте ветки `Lab1_task1`, `Lab1_task2` и `Lab1_task3`.
-
-3. Для следующей роли вернитесь в корень клона, получите изменения преподавателя
-   и создайте новую ветку и новую папку. Пример для второй задачи:
-
-   ```bash
-   cd ../../../..
-   git fetch upstream
-   git switch --create lab1/<github-login>/task2 upstream/main
-   mkdir -p Students/<github-login>/Lab1/task2
-   git archive upstream/Lab1_task2 | tar -x -C Students/<github-login>/Lab1/task2
-   cd Students/<github-login>/Lab1/task2
-   ```
-
-4. Для третьей задачи замените `task2` и `Lab1_task2` на `task3` и
-   `Lab1_task3`. В результате в вашей ветке появятся только ваши каталоги:
-
-   ```text
-   Students/<github-login>/Lab1/
-   task1/
-   task2/
-   task3/
-   ```
 
 ## Подготовка окружения
 
 После перехода в каталог нужной задачи, например
-`Students/<github-login>/Lab1/task1`, создайте окружение:
+`Students/<Фамилия-ИО>/Lab1/task1`, создайте окружение:
 
 ```bash
 python -m venv .venv
@@ -105,7 +54,7 @@ source .venv/bin/activate
    pytest <путь_до_файла_с_тестами> -q
    ```
 
-Задание считается выполненым, когда все тесты проходят и при этом, их количество и вызовы остались неизмменными.
+2. Задание считается выполненым, когда все тесты проходят и при этом, их количество и вызовы остались неизмменными.
 
 ## Задача 3. Найти расхождение тестов и приложения
 
@@ -125,36 +74,4 @@ source .venv/bin/activate
    Перейдите по адресу `http://127.0.0.1:8000`, сравните отображаемый процент
    с данными задач.
 
-
-## Отправка решения через Pull Request
-
-Из корня клона добавьте только папку своей задачи, создайте commit и отправьте
-ветку в свой fork. Пример для первой задачи:
-
-```bash
-cd ../../../..
-git status
-git diff -- Students/<github-login>/Lab1/task1
-git add Students/<github-login>/Lab1/task1
-git commit -m "Complete Lab1 task 1"
-git push -u origin lab1/<github-login>/task1
-```
-
-На GitHub откройте страницу своего fork и нажмите **Contribute**, затем
-**Open pull request**. В форме PR выберите:
-
-- base repository: `Besenok-13/Python_Industrial_Development`;
-- base branch: `main`;
-- head repository: ваш fork;
-- compare branch: `lab1/<github-login>/task1`.
-
-Для задач 2 и 3 замените номер во всех путях, имени ветки и сообщении commit.
-Не отправляйте изменения напрямую в `main`.
-
-Если перед слиянием преподаватель обновил `main`, синхронизируйте свою ветку:
-
-```bash
-git fetch upstream
-git rebase upstream/main
-git push --force-with-lease
-```
+3. Задание считается выполненным, когда на главной странице отображаются правильные значения, которые получаются из бэкенда. 

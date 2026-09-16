@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Lab1.iml" filepath="$PROJECT_DIR$/.idea/Lab1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-notifier.iml" filepath="$PROJECT_DIR$/.idea/task-notifier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-notifier@1.iml" filepath="$PROJECT_DIR$/.idea/task-notifier@1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-notifier@2.iml" filepath="$PROJECT_DIR$/.idea/task-notifier@2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-web.iml" filepath="$PROJECT_DIR$/.idea/task-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-web@1.iml" filepath="$PROJECT_DIR$/.idea/task-web@1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-web@2.iml" filepath="$PROJECT_DIR$/.idea/task-web@2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-workflow.iml" filepath="$PROJECT_DIR$/.idea/task-workflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-workflow@1.iml" filepath="$PROJECT_DIR$/.idea/task-workflow@1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task-workflow@2.iml" filepath="$PROJECT_DIR$/.idea/task-workflow@2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/team-board-lab.iml" filepath="$PROJECT_DIR$/.idea/team-board-lab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/team-board-lab@1.iml" filepath="$PROJECT_DIR$/.idea/team-board-lab@1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/team-board-lab@2.iml" filepath="$PROJECT_DIR$/.idea/team-board-lab@2.iml" />
+    </modules>
+  </component>
+</project>

@@ -11,7 +11,7 @@ def calculate_completion_rate(statuses: Sequence[str]) -> int:
 def calculate_completion_rate_New(statuses: Sequence[str]) -> int:
     if not statuses:
         return 0
-    return round(100 * statuses.count("done") / (len(statuses) + 1))
+    return round(100 * statuses.count("done") / (len(statuses)))
 
 
 def completion_for_dashboard(tasks: Sequence[object]) -> int:

@@ -2,5 +2,5 @@ import httpx
 
 
 def configure_transport() -> None:
-    client = httpx.Client(proxies=None)
+    client = httpx.Client()
     client.close()

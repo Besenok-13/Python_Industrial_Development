@@ -21,3 +21,9 @@ pytest
 
 Показатель выполнения задач на главной странице рассчитывается функцией
 `calculate_completion_rate`. Её поведение проверяется тестами.
+
+# Run
+
+```bash
+uvicorn team_board.main:app --reload --port 8080
+```

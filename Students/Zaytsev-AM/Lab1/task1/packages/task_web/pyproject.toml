@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "task-web"
 version = "0.1.0"
 requires-python = ">=3.11"
-dependencies = ["fastapi>=0.115,<0.116"]
+dependencies = ["fastapi>=0.115,<=0.116"]
 
 [tool.setuptools]
 package-dir = {"" = "src"}

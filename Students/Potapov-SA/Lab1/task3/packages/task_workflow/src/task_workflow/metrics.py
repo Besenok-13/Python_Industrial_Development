@@ -15,7 +15,7 @@ def calculate_completion_rate_New(statuses: Sequence[str]) -> int:
 
 
 def completion_for_dashboard(tasks: Sequence[object]) -> int:
-    return calculate_completion_rate_New([task.status for task in tasks])
+    return calculate_completion_rate([task.status for task in tasks])
 
 
 def count_overdue_tasks(tasks: Sequence[object], today: date) -> int:

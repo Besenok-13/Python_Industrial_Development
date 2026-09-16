@@ -2,7 +2,7 @@ from datetime import date, timedelta
 
 
 def shift_marker(start: date, days: int) -> date:
-    return start + timedelta(days=days - 1)
+    return start + timedelta(days=days)
 
 
 def sprint_length(start: date, end: date) -> int:

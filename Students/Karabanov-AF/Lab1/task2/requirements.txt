@@ -1,3 +1,0 @@
--e ./packages/task_web
--e ./packages/task_workflow
--e ./packages/task_notifier
